@@ -1,0 +1,572 @@
+:root {
+    --primary-color: #ffb6c1;
+    --secondary-color: #e6e6fa;
+    --text-color: #4a4a4a;
+    --background-color: #fff5f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    overflow: hidden;
+}
+
+.animated-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+    margin-top: 80px;
+}
+
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.music-player button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease;
+}
+
+.music-player button:hover {
+    transform: scale(1.1);
+}
+
+.section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color:#ff4d6d;
+    position: relative;
+    overflow: hidden;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.8s ease;
+}
+
+h2.visible::after {
+    width: 100px;
+    left: calc(50% - 50px);
+}
+
+/* Carousel Styles */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 1.5s ease;
+}
+
+.memory-item {
+    flex: 0 0 100%;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.memory-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.memory-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    transform: translateX(50px);
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Love Notes Styles */
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.note {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.note:hover {
+    transform: rotateY(180deg) scale(1.05);
+}
+
+.note-front, .note-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.note-back {
+    transform: rotateY(180deg);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    width:100vw;
+}
+
+.footer-content {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+}
+
+.heart {
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    margin: 0 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Floating Hearts Animation */
+@keyframes floatingHeart {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(15vh) scale(1);
+    }
+    100% {
+        transform: translateY(10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+.floating-heart {
+    position: fixed;
+    font-size: 24px;
+    color: #ff4d6d;
+    pointer-events: none;
+    animation: floatingHeart 4s ease-in-out forwards;
+    z-index: 0;
+}
+
+/* Add variety to floating hearts */
+.floating-heart:nth-child(even) {
+    animation-duration: 5.5s;
+}
+
+.floating-heart:nth-child(3n) {
+    animation-duration: 5.5s;
+}
+
+.floating-heart:nth-child(5n) {
+    animation-duration: 5.5s;
+}
+
+/* Dream Item Animation */
+
+.dream-pic{
+    height:200px;
+    width:230px;
+    border-radius:20px;
+    border:#ff4d6d solid;
+    
+    
+}
+.dream-item{
+    text-align:center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .animated-message {
+        font-size: 2.5rem;
+    }
+
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+
+    .heart-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .heart-left, .heart-right {
+        width: 50px;
+        height: 80px;
+    }
+
+    .heart-left {
+        left: 50px;
+    }
+
+    @keyframes bigHeartbeat {
+        0% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+        25% {
+            transform: translate(-50%, -140%) scale(1.1);
+        }
+        40% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+        60% {
+            transform: translate(-50%, -140%) scale(1.2);
+        }
+        100% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+    }
+}
+
+/* Update the mouse movement handler in JavaScript for better 3D effect */
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .big-heart {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .heart-path-wireframe,
+    .wireframe-segment {
+        stroke-width: 0.5;
+    }
+    
+    .connection-point {
+        r: 1.5;
+    }
+}
+
+/* Update mini-heart burst effect */
+.mini-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.mini-heart svg {
+    width: 100%;
+    height: 100%;
+    animation: burstHeart 1s ease-out forwards;
+}
+
+.mini-heart path {
+    fill: none;
+    stroke: #ff4d6d;
+    stroke-width: 2;
+}
+
+@keyframes burstHeart {
+    0% {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .big-heart {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .heart-path-wireframe,
+    .wireframe-segment {
+        stroke-width: 0.5;
+    }
+    
+    .connection-point {
+        r: 1.5;
+    }
+}
+
+/* Update Big Heart Styles */
+.big-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    perspective: 1000px;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.big-heart svg {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotateHeart 10s linear infinite;
+}
+
+/* Glow effect */
+.heart-glow {
+    fill: rgba(255, 77, 109, 0.2);
+    filter: blur(10px);
+    transform-origin: center;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Shadow with depth */
+.heart-shadow {
+    fill: rgba(0, 0, 0, 0.2);
+    transform: translate(3px, 5px);
+    filter: blur(5px);
+    animation: shadowMove 1.4s ease-in-out infinite;
+}
+
+/* Main heart with gradient */
+.heart-path {
+    fill: url(#heartGradient);
+    filter: url(#complexShadow);
+    transform-origin: center;
+    animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+/* Glossy overlay */
+.heart-gloss {
+    fill: url(#glossGradient);
+    mix-blend-mode: soft-light;
+    opacity: 0.7;
+    animation: glossShift 3s ease-in-out infinite;
+}
+
+/* Animations */
+
+
+@keyframes heartbeat {
+    0% { transform: scale(1) translateY(0); }
+    25% { transform: scale(1.1) translateY(-2px); }
+    40% { transform: scale(1) translateY(0); }
+    60% { transform: scale(1.2) translateY(-4px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+}
+
+@keyframes shadowMove {
+    0%, 100% { transform: translate(3px, 5px); }
+    50% { transform: translate(4px, 6px); }
+}
+
+@keyframes glossShift {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.9; transform: translateX(2px); }
+}
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -53%); }
+}
+
+/* Hover effects */
+.big-heart:hover svg {
+    animation-play-state: paused;
+}
+
+.big-heart:hover .heart-path {
+    filter: url(#complexShadow) url(#glow);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.big-heart:hover .heart-gloss {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.big-heart:hover .heart-glow {
+    filter: blur(15px);
+    transition: filter 0.3s ease;
+}
+
+/* Click animation */
+.big-heart:active .heart-path {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* Update hero styles to ensure proper positioning */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    overflow: hidden;
+}
+
+.animated-message {
+    margin-top: 80px; /* Add space below the heart */
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .big-heart {
+        font-size: 100px;
+    }
+    
+    @keyframes bigHeartbeat {
+        0% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+        25% {
+            transform: translate(-50%, -140%) scale(1.1);
+        }
+        40% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+        60% {
+            transform: translate(-50%, -140%) scale(1.2);
+        }
+        100% {
+            transform: translate(-50%, -140%) scale(1);
+        }
+    }
+}
